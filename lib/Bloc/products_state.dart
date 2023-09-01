@@ -1,23 +1,23 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter_mobel_test/enums/loading_status.dart';
 
 import '../models/products.dart';
 
 
-abstract class ProductState {}
 
-class ProductLoading extends ProductState {}
+class ProductState extends Equatable {
+  const ProductState(
+      {this.product, this.status = LoadingStatus.loading});
+  final List<Product>? product;
+  final LoadingStatus status;
+  bool get isLoading => status == LoadingStatus.loading;
+  bool get issucess => status == LoadingStatus.success;
+  ProductState copyWith(
+      {List<Product>? product, LoadingStatus? status}) {
+    return ProductState(
+        product: product ?? this.product, status: status ?? this.status);
+  }
 
-class ProductLoaded extends ProductState {
-
- ProductLoaded(this.product);
-  final List<Product> product;
-
-ProductLoaded copyWith(
- {List<Product>? product,
- }){
-  return ProductLoaded(
-    product??this.product);
- }
-
-@override
-List<Object> get props =>[product];
+  @override
+  List<Object?> get props => [product, status];
 }

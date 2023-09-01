@@ -9,10 +9,10 @@ class Product {
   static Future<List<Product>> generateFakeProducts() async {
     await Future.delayed(const Duration(seconds: 2));
 
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVW';
 
     return List.generate(
-        10,
+        characters.length,
         (index) => Product(
             title: 'Product ${characters[index % characters.length]}$index',
             description: 'Description $index'));
